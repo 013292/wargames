@@ -11,5 +11,6 @@ l10: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
 l11: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 l12: 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 l13: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+l14: ssh -i <private key in l13> bandit14@localhost
 
 
