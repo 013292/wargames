@@ -153,3 +153,7 @@ $ systemctl status tor
 // tor:
 $ service tor status
 $ curl -x socks5h://localhost:9050 -s https://check.torproject.org/ | grep -m 1 Congrat | xargs
+
+//tar, show the content
+$ tar -tf
+
