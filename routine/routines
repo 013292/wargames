@@ -1,0 +1,155 @@
+// where is the xxx.h:
+$ gcc -E xxx.c | grep xxx.h
+// show arp list:
+$ arp -vn
+
+//gdb multi-processes:
+set follow-fork-mode child
+set detach-on-fork off
+inferiors <pid>
+//gdb multi-threads:
+set scheduler-locking on
+thread <tid>
+
+typedef A B;
+#define A B
+
+//gdb
+$ x /10x $sp
+$ info frame
+$ info args
+$ info locals
+$ info registers
+$ info all-registers
+
+kill -9
+
+// gitlab 
+git remote add <upstream> <repo url>
+git remote -v
+git switch master
+git fetch upstream
+git merge upstream
+
+// clone from a branch:
+git clone -b <branch name> <repo url>
+// save the passwd:
+git config --global credential.helper store
+// move back
+git reset --hard <log id>
+
+// print DEFINE in gdb:
+CFLAGS: -g3 -gdwarf-2
+
+ssh csiv@10.42.25.13
+ps -ef | grep dlp
+ps -ef|grep engine
+watch tail /DLP/log/tc.log
+sudo bash /DLP/traffic_collector/tc.sh restart
+
+
+// cannot open vmware:
+#!/bin/bash
+VMWARE_VERSION=workstation-15.5.1
+TMP_FOLDER=/tmp/patch-vmware
+rm -fdr $TMP_FOLDER
+mkdir -p $TMP_FOLDER
+cd $TMP_FOLDER
+git clone https://github.com/mkubecek/vmware-host-modules.git
+cd $TMP_FOLDER/vmware-host-modules
+git checkout $VMWARE_VERSION
+git fetch
+make
+sudo make install
+sudo rm /usr/lib/vmware/lib/libz.so.1/libz.so.1
+sudo ln -s /lib/x86_64-linux-gnu/libz.so.1 /usr/lib/vmware/lib/libz.so.1/libz.so.1
+sudo /etc/init.d/vmware restart
+
+$ rpm -qa | grep java
+
+// docker
+$ docker inspect <container name> | grep -i "network"
+$ docker network inspect bridge
+$ docker run -v /home/cetc/workspace/hello:/mnt/ -it dns
+$ docker commit 991277cb4da0 dns
+$ docker container prune
+
+// show the disk space
+$ df -h
+// show the space of the folder
+$ du -sh <folder name>
+
+// change save path of docker
+$ systemctl stop docker
+$ vi /etc/systemd/system/docker.service.d/devicemapper.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd  --graph=<new path>
+$ systemctl daemon-reload
+$ systemctl restart docker
+$ systemctl enable docker
+
+//pip source
+$ vi .pip/pip.conf
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+
+//cpuinfo
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+cat /proc/cpuinfo| grep "processor"| wc -l
+grep 'processor' /proc/cpuinfo | sort -u | wc -l
+
+//meminfo
+$ cat /proc/meminfo
+
+//find
+$ find . -type d -name <filename>
+// list kernel modules of linux:
+$ lsmod
+// gdb program with args:
+(gdb) set args <--->
+
+//vmware 3 kinds of network configs:
+https://blog.csdn.net/liemou0394/article/details/87309996
+
+//generate ssh key:
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+// startline in jupyter notebook
+%load_ext autoreload
+%autoreload 2
+%matplotlib inline
+
+// jupyter notebook setting
+$ jupyter notebook --generate-config 
+$ vi ~/.jupyter/jupyter_notebook_config.py
+c.NotebookApp.token = ''
+c.NotebookApp.allow_root = True
+c.NotebookApp.ip = '*'
+c.NotebookApp.open_browser = False
+
+// git config
+$ git config --global user.name 'csiv'
+$ git config --global user.email cetc13292@sina.com
+
+//ssh 226
+$ docker run --gpus all -v /raid/csiv/:/home -it -p 8666:8888 csiv /bin/bash
+
+//ubuntu management:
+$ lsb_release
+
+//DGX-1:
+$ ssh root@10.42.0.226
+// run app in background:
+$ jobs
+$ bg 1
+// run app in foreground:
+$ fg 1
+// check port:
+$ netstat -tunlp | grep 8000
+// check service:
+$ systemctl status tor
+// tor:
+$ service tor status
+$ curl -x socks5h://localhost:9050 -s https://check.torproject.org/ | grep -m 1 Congrat | xargs
